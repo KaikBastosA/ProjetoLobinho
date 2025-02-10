@@ -1,6 +1,6 @@
 async function inicializarLocalStorage() {
     try {
-        const response = await fetch('lobinhos.json');
+        const response = await fetch(String(path.substring(0, getSubstringPosition(serverPath, '/', 3), path) + relativePathWolfJson));
         if (!response.ok) {
             throw new Error(`Erro ao buscar lobinho.json: ${response.statusText}`);
         }
@@ -21,3 +21,8 @@ if (!localStorage.getItem('lobos')) {
         console.error('Erro durante a inicialização do localStorage:', error);
     });
 }
+
+function getSubstringPosition(string, subString, nth_occur) {
+    return string.split(subString, nth_occur).join(subString).length;
+}
+
