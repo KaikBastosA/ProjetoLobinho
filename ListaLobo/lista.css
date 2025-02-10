@@ -63,9 +63,9 @@ footer {
     outline: none;
 }
 
-#wolf-search-button {
+#add-wolf-button {
     height: 100%;
-    width: 10%;
+    width: 100%;
     align-self: stretch;
     background-color: #DEB959;
     color: #FFF;
@@ -74,6 +74,7 @@ footer {
     font-weight: 500;
     cursor: pointer;
 }
+
 
 /* ---------------- */
 
@@ -88,6 +89,11 @@ header a {
 
 header a:first-child {
     position: relative;
+}
+
+.search-bar-container a {
+    width: 10%;
+    height: 100%;
 }
 
 header a:first-child::after {
@@ -273,6 +279,11 @@ header a:last-child:hover::after {
     align-items: flex-start;
 }
 
+.adopt-link {
+    width: 20%;
+    height: clamp(40px, 5vh, 50px);
+}
+
 .wolf-name-box a {
     width: fit-content;
     text-decoration: none;
@@ -309,8 +320,8 @@ header a:last-child:hover::after {
 .adopt-button {
     border: none;
     color: #FFF;
-    width: 20%;
-    height: clamp(40px, 5vh, 50px);
+    width: 100%;
+    height: 100%;
     font-size: 1.5rem;
     font-weight: 500;
     cursor: pointer;
