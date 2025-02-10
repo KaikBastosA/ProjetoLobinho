@@ -1,3 +1,6 @@
+let serverPath = String(window.location.href);
+let relativePathWolfJson = "/Arquivos e Imagens/lobinhos.json"
+
 async function inicializarLocalStorage() {
     try {
         const response = await fetch(String(path.substring(0, getSubstringPosition(serverPath, '/', 3), path) + relativePathWolfJson));
