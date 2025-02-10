@@ -88,6 +88,13 @@ function createWolfArticle({nome, idade, descricao, imagem, adotado, nomeDono}) 
     adoptButtonLink.href = wolfLink;
     adoptButtonLink.classList.add("adopt-link");
 
+    // Evita que a Página Recarregue:
+    if (adotado === true) {
+        adoptButtonLink.addEventListener("click", (event) => {
+            event.preventDefault();
+        });
+    }
+
     const adoptButton = document.createElement("button");
     adoptButton.classList.add("adopt-button");
     adoptButton.classList.add(adotado ? "adopted" : "adopt");
@@ -130,6 +137,6 @@ function createWolfArticle({nome, idade, descricao, imagem, adotado, nomeDono}) 
 }
 
 
-console.log();
-document.querySelector(".wolf-posts-container").append(createWolfArticle(JSON.parse(localStorage.getItem('lobos'))[0]));
+console.log(JSON.parse(localStorage.getItem('lobos')));
+document.querySelector(".wolf-posts-container").append(createWolfArticle(JSON.parse(localStorage.getItem('lobos'))[2]));
 
