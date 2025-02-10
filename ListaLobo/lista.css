@@ -86,19 +86,49 @@ header a {
     font-weight: 700;
 }
 
+header a:first-child {
+    position: relative;
+}
+
+header a:first-child::after {
+    content: "";
+    text-align: right;
+    position: relative;
+    display: inline-block;
+    bottom: 0;
+    left: -10px;
+    display: block;
+    width: 0;
+    height: 4px;
+    background-color: #333;
+    transition: 1s all ease-in-out;
+}
+
+header a:first-child:hover::after {
+    width: 70%;
+}
+
 header a:last-child {
     position: relative;
+    direction: rtl;
 }
 
 header a:last-child::after {
     content: "";
+    text-align: right;
     position: relative;
+    display: inline-block;
     bottom: 0;
-    right: -40%;
+    right: -10px;
     display: block;
-    width: 65%;
+    width: 0%;
     height: 4px;
     background-color: #333;
+    transition: 1s all ease-in-out; 
+}
+
+header a:last-child:hover::after {
+    width: 70%;
 }
 
 .header-container {
@@ -277,7 +307,6 @@ header a:last-child::after {
 }
 
 .adopt-button {
-    background-color: #DEB959;
     border: none;
     color: #FFF;
     width: 20%;
@@ -285,6 +314,14 @@ header a:last-child::after {
     font-size: 1.5rem;
     font-weight: 500;
     cursor: pointer;
+}
+
+.adopted {
+    background-color: #DEB959;
+}
+
+.adopt {
+    background-color: #7AAC3A;
 }
 
 .wolf-info {
