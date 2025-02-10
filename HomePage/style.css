@@ -1,0 +1,254 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: Darker Grotesque, sans-serif;
+}
+
+.cabecalho{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    background-color: #85CDF5;
+    padding: 0 10rem;
+}
+
+.cabecalho nav{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10px;
+}
+
+.cabecalho ul{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    list-style: none;
+}
+
+.cabecalho li{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cabecalho a{
+    text-decoration: none;;
+    color: #333333;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.cabecalho img{
+    width: 88px;
+    height: 110px;
+}
+
+.banner{
+    width: 100%;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-image: url(../Arquivos\ e\ Imagens/banner2.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    text-align: center;
+    position: relative;
+    padding: 2rem 0;
+}
+
+.banner::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.banner img{
+    width: 200px;
+    height: 200px;
+}
+
+.banner h1{
+    font-size: 96px;
+    font-weight: 700;
+    line-height: 130px;
+    color: #fff;
+    z-index: 2;
+}
+
+.title::after {
+    content: "";
+    display: block;
+    width: 99px;
+    height: 5px;
+    background-color: white;
+    margin: 0;
+    padding: 0;
+    margin: 10px auto;
+}
+
+.banner p{
+    font-size: 30px;
+    width: 50%;
+    font-weight: 400;
+    text-align: center;
+    color: white;
+    line-height: 25px;
+    z-index: 2;
+}
+
+.sobre{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background-color: #2C5680;
+}
+
+.sobre h1{
+    font-size: 3rem;
+    font-weight: 700;
+    color: #DEB959;
+    padding: 20px 0;
+}
+
+.sobre p{
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 32.54px;
+    letter-spacing: 0;
+    color: white;
+    margin: 0 220px;
+    padding: 0 0 3% 0;
+}
+
+.valores{
+    width: 100%;
+    height: auto;
+    background-color: #333333;
+    color: white;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 3% 10% 3% 10%;
+}
+
+.valores h1{
+    font-size: 3rem;
+    font-weight: 700;
+    color: #DEB959;
+    margin-bottom: 20px;
+}
+.tipos{
+    width: 100%;
+    gap: 10px;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    align-content: center;
+}
+
+
+.tipos img{
+    background-color: white;
+    background-size: cover;
+    padding: 10%;
+    object-fit: cover;
+    clip-path: ellipse(50% 50% at 50% 50%);
+    
+}
+
+.tipos h3{
+    font-size: 2.125rem;
+    margin: 20px 0;
+}
+
+.tipos p{
+    font-size: 1.625rem;
+    line-height: 20px;
+}
+
+.tipos .valor{
+    width: 18%;
+    text-align: center;
+}
+
+.listas{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.listas h1{
+    font-size: 3rem;
+    font-weight: 700;
+    color: #DEB959;
+    margin-bottom: 40px;
+}
+
+.listas .lobinho{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    gap: 50px;
+}
+
+.lobinho .imglobinho{
+    width: 50%;
+    height: auto;
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+}
+
+.imglobinho img{
+    width: 100%;
+    max-width: 430px;
+    height: auto;
+    position: relative;
+    z-index: 2;
+}
+
+.imglobinho::before{
+    align-self: flex-start;
+    content: "";
+    right: 3%;
+    bottom: 8%;
+    border: 4px solid #333333;
+    position: absolute;
+    width: 65%;
+    height: 100%;
+    background-color: #2b5c83;
+    z-index: 1;
+}
+
+
+
+.lobinho .infolobinho{
+    width: 50%;
+    height: auto;
+}
