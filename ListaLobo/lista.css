@@ -51,9 +51,20 @@ footer {
 
 /* ----- ID'S ----- */
 
-#wolf-icon {
-    height: 80%;
+#wolf-icon-link {
+    height: 70%;
+    transition: height 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
+
+#wolf-icon {
+    height: 100%;
+    will-change: height;
+}
+
+#wolf-icon-link:hover {
+    height: 90%;
+}
+
 
 #wolf-search-bar {
     border: none;
@@ -107,7 +118,7 @@ header a:first-child::after {
     width: 0;
     height: 4px;
     background-color: #333;
-    transition: 1s all ease-in-out;
+    transition: 1s all cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 header a:first-child:hover::after {
@@ -130,7 +141,7 @@ header a:last-child::after {
     width: 0%;
     height: 4px;
     background-color: #333;
-    transition: 1s all ease-in-out; 
+    transition: 1s all cubic-bezier(0.175, 0.885, 0.32, 1.275); 
 }
 
 header a:last-child:hover::after {

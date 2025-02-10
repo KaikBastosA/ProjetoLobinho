@@ -1,6 +1,10 @@
 let serverPath = String(window.location.href);
 let relativePathWolfJson = "/Arquivos e Imagens/lobinhos.json"
 
+function getSubstringPosition(string, subString, nth_occur) {
+    return string.split(subString, nth_occur).join(subString).length;
+}
+
 async function inicializarLocalStorage() {
     try {
         const response = await fetch(String(serverPath.substring(0, getSubstringPosition(serverPath, '/', 3) + relativePathWolfJson)));
@@ -25,7 +29,4 @@ if (!localStorage.getItem('lobos')) {
     });
 }
 
-function getSubstringPosition(string, subString, nth_occur) {
-    return string.split(subString, nth_occur).join(subString).length;
-}
 
