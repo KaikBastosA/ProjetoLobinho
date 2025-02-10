@@ -23,6 +23,13 @@ header {
     justify-content: center;
 }
 
+body {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 main {
     width: 100%;
@@ -30,6 +37,16 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    flex: 1;
+}
+
+
+footer {
+    width: 100%;
+    min-height: clamp(250px, 20vh, 300px);
+    background-color: #333;
+    display: flex;
+    flex-direction: column;
 }
 
 /* ----- ID'S ----- */
@@ -97,6 +114,7 @@ header a:last-child::after {
 .search-section {
     width: 70%;
     margin-top: 33px;
+    flex: 1;
 }
 
 .search-bar-box {
@@ -158,10 +176,13 @@ header a:last-child::after {
 
 .wolf-posts-container {
     margin-top: 39px;
+    flex: 5;
     box-sizing: content-box;
     width: 70%;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     gap: 79px;
 }
 
@@ -293,4 +314,106 @@ header a:last-child::after {
 /* ----- FIM DA ESTILIZAÇÃO DOS POSTS DE LOBO ----- */
 
 
-/* -----  -----*/
+/* --------- ESTILIZAÇÃO DA BARRA DE PAGINAÇÃO -------- */
+
+.pagination-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 50px;
+    margin-bottom: 27px;
+    flex: 1;
+}
+
+.page-number-link {
+    font-family: 'Roboto', sans-serif;
+    color: #000;
+    text-decoration: none;
+}
+
+.current-page {
+    background-color: #DEB959;
+}
+
+/* ----- FIM DA ESTILIZAÇÃO DA BARRA DE PAGINAÇÃO ----- */ 
+
+
+/* ----- ESTILIZAÇÃO DO FOOTER ----- */
+
+.division-bar {
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(to right,#DEB959, #2C5680);
+}
+
+.footer-content-container {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: #FFF;
+    gap: clamp(20px, 7vw, 100px);
+}
+
+.location-information-container {
+    display: flex;
+    height: 70%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    max-width: 25%;
+    gap: 10%;
+}
+
+.location-information-container div {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+}
+
+.location-information-container div img {
+    width: 14px;
+    height: 14px;
+}
+
+.location-information-container div p {
+    font-weight: 200;
+    line-height: 20px;
+    font-size: 0.8rem;
+}
+
+.footer-content-container iframe {
+    width: clamp(200px, 20%, 350px);
+    height: 70%;
+}
+
+.location-information-container button {
+    width: fit-content;
+    height: 25%;
+    margin-top: auto;
+}
+
+.Who-we-are {
+    background-color: #DEB959;
+    color: #353535;
+    font-weight: 400;
+    text-decoration: none;
+    font-weight: 800;
+    padding: 0 10px;
+    margin-top: auto;
+}
+
+.paw-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ----- FIM DA ESTILIZAÇÃO DO FOOTER ----- */
+
