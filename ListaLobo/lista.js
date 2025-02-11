@@ -231,16 +231,20 @@ function createPaginationBar() {
     const paginationSection = document.createElement("section");
     paginationSection.classList.add("pagination-section");
 
-    const leftPageShift = document.createElement("a");
-    leftPageShift.href = "./lista.html";
-    leftPageShift.classList.add("page-number-link");
-    leftPageShift.innerText = "<<";
-    leftPageShift.addEventListener("click", () => {
-        localStorage.setItem('currentUserPage', Math.max(1, currentUserPage - 1));
-    });
+    // Cria o Slider para a Esquerda Somente Quando Necessário:
+    if (currentUserPage > 1) {
+        const leftPageShift = document.createElement("a");
+        leftPageShift.href = "./lista.html";
+        leftPageShift.classList.add("page-number-link");
+        leftPageShift.innerText = "<<";
+        leftPageShift.addEventListener("click", () => {
+            localStorage.setItem('currentUserPage', Math.max(1, currentUserPage - 1));
+        });
+    
+        // Adiciona o Ícone de "<<" à Barra de Paginação:
+        paginationSection.append(leftPageShift);
+    }
 
-    // Adiciona o Ícone de "<<" à Barra de Paginação:
-    paginationSection.append(leftPageShift);
 
     // Se a página atual está distante pelo menos pageOffset da primeira página:
     if (minPageNumber > 1) {
@@ -290,23 +294,22 @@ function createPaginationBar() {
         paginationSection.append(rightEllipsis);
     }
     
-    const rightPageShift = document.createElement("a");
-    rightPageShift.href = "./lista.html";
-    rightPageShift.classList.add("page-number-link");
-    rightPageShift.innerText = ">>";
-    rightPageShift.addEventListener("click", () => {
-        localStorage.setItem('currentUserPage', Math.min(maxNumberPages, currentUserPage + 1));
-    });
-
-    // Adiciona o Ícone de "<<" à Barra de Paginação:
-    paginationSection.append(rightPageShift);
+    // Cria o Slider para a Direita Somente Quando Necessário:
+    if (currentUserPage < maxNumberPages) {
+        const rightPageShift = document.createElement("a");
+        rightPageShift.href = "./lista.html";
+        rightPageShift.classList.add("page-number-link");
+        rightPageShift.innerText = ">>";
+        rightPageShift.addEventListener("click", () => {
+            localStorage.setItem('currentUserPage', Math.min(maxNumberPages, currentUserPage + 1));
+        });
+    
+        // Adiciona o Ícone de "<<" à Barra de Paginação:
+        paginationSection.append(rightPageShift);
+    }
 
     return paginationSection;
 }
 
 wolfListMain();
-// let listaLobin = JSON.parse(localStorage.getItem('lobos'));
-
-// console.log(JSON.parse(localStorage.getItem('lobos')));
-// document.querySelector(".wolf-posts-container").append(createWolfArticle(JSON.parse(localStorage.getItem('lobos'))[89]));
 
