@@ -1,5 +1,7 @@
 import { inicializarLocalStorage } from '../Arquivos e Imagens/script.js'
 
+// TODO: REMOVER CHECKED E SEARCH DO LOCAL STORAGE AO ACESSAR ADOTAR LOBINHO
+
 const pageOffset = 2;
 const numberOfWolvesPerPage = 4;
 
@@ -9,12 +11,6 @@ const nullSearch = {
     searchResult: null,
     searchResultFiltered: null
 };
-
-// Define o Primeiro Acesso sendo na Primeira Página
-if (!localStorage.getItem('currentUserPage')) localStorage.setItem('currentUserPage', 1);
-
-// Define o Valor Padrão para a Barra de Busca:
-if (!localStorage.getItem('currentUserSearch')) localStorage.setItem('currentUserSearch', JSON.stringify(nullSearch));
 
 
 async function saveToggleFilterCheckbox() {
@@ -28,7 +24,8 @@ async function saveToggleFilterCheckbox() {
 async function clearFilters() {
     // Resetando Filtros de Busca:
     localStorage.setItem('currentUserSearch', JSON.stringify(nullSearch));
-    localStorage.setItem('checked', false);
+    localStorage.removeItem('checked');
+    localStorage.removeItem('lobosAdotados');
 }
 
 
@@ -36,49 +33,37 @@ async function initLocalStorageWolfList() {
     // Chamada Assíncrona para Certificar a Existência do Local Storage dos Lobos:
     await inicializarLocalStorage();
 
-    // Máximo de Páginas já Estabelecido => Early Return:
-    if (localStorage.getItem('maxNumberPages')) return;
-    
-    // Máximo de Páginas Indefinido:
-    let wolfArray = JSON.parse(localStorage.getItem('lobos'));
-    let currentUserSearch = JSON.parse(localStorage.getItem('currentUserSearch'));
-    
-    let newMaxUserPages;
-    if (currentUserSearch.searchFlag) {
-        // Erro!
-        if (currentUserSearch.searchContent === null) return;
+    // Inicializa o Marcador de Página
+    if (!localStorage.getItem('currentUserPage')) localStorage.setItem('currentUserPage', 1);
 
-        if (currentUserSearch.searchResult === null) {
-            wolfArray = wolfArray.filter((wolf) => wolf.nome === currentUserSearch.searchContent);
-            newMaxUserPages = Math.ceil(wolfArray.length / numberOfWolvesPerPage);
-
-            // Armazena o Resultado da Pesquisa:
-            currentUserSearch.searchResult = wolfArray;
-            localStorage.setItem('currentUserSearch', JSON.stringify(currentUserSearch));
-        } else {
-            wolfArray = currentUserSearch.searchResult;
-        }
-    } else {
-        newMaxUserPages = Math.ceil(wolfArray.length / numberOfWolvesPerPage);        
-    }
+    // Define o Valor Padrão para a Barra de Busca:
+    if (!localStorage.getItem('currentUserSearch')) localStorage.setItem('currentUserSearch', JSON.stringify(nullSearch));
     
-    newMaxUserPages = Math.ceil(wolfArray.length / numberOfWolvesPerPage);
-    localStorage.setItem('maxNumberPages', newMaxUserPages);
+    // Estabelece o Número Máximo de Páginas:
+    updateMaxNumberOfPages(null);
 }
 
 
 async function loadWolfPosts() {
     const wolfsPostContainer = document.querySelector(".wolf-posts-container");
     
+    const currentUserSearch = JSON.parse(localStorage.getItem('currentUserSearch'));
+    
+    if (currentUserSearch.searchContent !== null &&
+        currentUserSearch.searchContent !== undefined &&
+        currentUserSearch.searchContent !== ""
+    ) {
+        const wolfSearchBar = document.querySelector('#wolf-search-bar');
+        wolfSearchBar.value = currentUserSearch.searchContent;
+    }
+    
     // Esvazia o Conteúdo Prévio:
     wolfsPostContainer.innerHTML = "";
     
     const wolfArray = await getCurrentWolfArray();
     
-    // console.log("wolf retornado: ", wolfArray);
-    
     // Atualiza o Número Máximo de Páginas:
-    updateMaxNumberOfPages(wolfArray);
+    await updateMaxNumberOfPages(wolfArray);
 
     let pageOffset = Number(localStorage.getItem('currentUserPage')) - 1;
 
@@ -106,21 +91,21 @@ async function createFilteredWolfList() {
     const currentUserSearch = JSON.parse(localStorage.getItem('currentUserSearch'));
     let wolfSearchArray;
 
-    if (currentUserSearch.searchFlag) {
-        // Lista Filtrada de Pesquisa já Existe:
-        if (currentUserSearch.searchResultFiltered !== null) return;
-
+    if (currentUserSearch.searchFlag) {            
         // Criando Lista de Lobos Filtrada:
         wolfSearchArray = loadWolfSearchArray();
-
+        
         wolfSearchArray = wolfSearchArray?.filter(elem => elem.adotado === true);
-
+        
         currentUserSearch.searchResultFiltered = wolfSearchArray;
-
+            
         // Armazena o Resultado da Filtragem no Local Storage:
         localStorage.setItem('currentUserSearch', JSON.stringify(currentUserSearch));
         
     } else {
+        // Lobos Filtrados já Existem:
+        if (localStorage.getItem('lobosAdotados')) return;
+
         wolfSearchArray = JSON.parse(localStorage.getItem('lobos'));
 
         wolfSearchArray = wolfSearchArray?.filter(elem => elem.adotado === true);
@@ -139,7 +124,7 @@ async function wolfListMain() {
     await initLocalStorageWolfList();
 
     let filterFlag = localStorage.getItem('checked');
-    if (filterFlag === null) {
+    if (!filterFlag) {
         filterFlag = "false";
         localStorage.setItem('checked', false);
     }
@@ -159,18 +144,14 @@ async function getCurrentWolfArray() {
     if (currentUserSearch.searchFlag === true) {
         if (filterCheckBox === "true") {
             await createFilteredWolfList();
-            console.log("retornou: ", currentUserSearch.searchResultFiltered);
-            return currentUserSearch.searchResultFiltered;
+            return JSON.parse(localStorage.getItem('currentUserSearch')).searchResultFiltered;
         }
-        console.log("retornou: ", currentUserSearch.searchResult);
-        return currentUserSearch.searchResult;
+        return loadWolfSearchArray();
     } else {
         if (filterCheckBox === "true") {
             await createFilteredWolfList();
-            console.log("retornou: ", JSON.parse(localStorage.getItem('lobosAdotados')));
             return JSON.parse(localStorage.getItem('lobosAdotados'));
         }
-        console.log("retornou: ", JSON.parse(localStorage.getItem('lobos')));
         return JSON.parse(localStorage.getItem('lobos'));
     }
 }
@@ -182,7 +163,6 @@ async function saveWolfObject(wolfArticle) {
 
     
     for (let index = 0; index < wolfPostsContainer.length; index++) {
-        console.log(wolfArticle, wolfPostsContainer[index]);
         if (wolfPostsContainer[index] == wolfArticle) {
             const wolfIndex = (Number(localStorage.getItem('currentUserPage')) - 1) * numberOfWolvesPerPage + index;
             const selectedWolf = wolfArray[wolfIndex];
@@ -191,12 +171,12 @@ async function saveWolfObject(wolfArticle) {
             break;
         }
     }
-    
-    // Reinicia o Contador de Páginas:
+
+    // Define o Primeiro Acesso sendo na Primeira Página:
     localStorage.setItem('currentUserPage', 1);
 
-    // Limpa o Filtro de Busca:
-    localStorage.setItem('currentUserSearch', JSON.stringify(nullSearch));
+    // Limpa os Filtros de Busca:
+    await clearFilters();
 }
 
 
@@ -207,22 +187,23 @@ function loadWolfSearchArray() {
     if (currentUserSearch.searchFlag === false ||
         currentUserSearch.searchContent === null) return null;
 
-    // Array de Busca já Existe:
-    if (currentUserSearch.searchResult !== null) return currentUserSearch.searchResult;
-
     let wolfArray = JSON.parse(localStorage.getItem('lobos'));
 
-    wolfArray = wolfArray.filter((wolf) => wolf.nome.toLowerCase().startsWith(currentUserSearch.searchContent.toLowerCase()));
+    wolfArray = wolfArray.filter((wolf) => wolf.nome.toLowerCase().startsWith(currentUserSearch.searchContent));
 
     // Armazena o Resultado da Pesquisa:
     currentUserSearch.searchResult = wolfArray;
     localStorage.setItem('currentUserSearch', JSON.stringify(currentUserSearch));
+
+    return wolfArray;
 }
 
 
-function updateMaxNumberOfPages(wolfArray) {
-    localStorage.setItem('maxNumberPages',
-        Math.ceil(wolfArray.length / numberOfWolvesPerPage));
+async function updateMaxNumberOfPages(wolfArray) {
+    if (wolfArray === null || wolfArray === undefined) wolfArray = await getCurrentWolfArray();
+    
+    localStorage.setItem('maxNumberPages', Math.ceil(wolfArray.length / numberOfWolvesPerPage));
+
     return;
 }
 
@@ -389,6 +370,25 @@ function createPaginationBar() {
     const paginationSection = document.createElement("section");
     paginationSection.classList.add("pagination-section");
 
+    if (maxNumberPages < currentUserPage) {
+        // Página Atual é Menor que o Máximo de Páginas:
+        let currentPageNumber = document.createElement("a");
+        currentPageNumber.href = "./lista.html";
+        currentPageNumber.classList.add("page-number-link");
+        currentPageNumber.addEventListener("click", (event) => {
+            // Evita que a Página seja Recarregada:
+            event.preventDefault();
+        });
+
+        currentPageNumber.innerText = "1";
+        paginationSection.append(currentPageNumber);
+
+        // Corrige o Número Atual da Página:
+        localStorage.setItem('currentUserPage', 1);
+
+        return paginationSection;
+    }
+
     // Cria o Slider para a Esquerda Somente Quando Necessário:
     if (currentUserPage > 1) {
         const leftPageShift = document.createElement("a");
@@ -475,5 +475,31 @@ wolfListMain();
 document.querySelector(".wolf-filter").addEventListener("click", async () => {
     await saveToggleFilterCheckbox();
     await createFilteredWolfList();
+    await loadWolfPosts();
+});
+
+
+document.querySelector("#wolf-search-bar").addEventListener("keydown", async (event) => {
+    if (event.key !== "Enter") return;
+
+    // Enter Pressionado:
+    if (event.target.value !== "") {
+        const currentUserSearch = JSON.parse(localStorage.getItem('currentUserSearch'));
+    
+        currentUserSearch.searchFlag = true;
+        currentUserSearch.searchContent = event.target.value.toLowerCase();
+    
+        // Salva o Conteúdo Pesquisado:
+        localStorage.setItem('currentUserSearch', JSON.stringify(currentUserSearch));
+    } else {
+        // Barra de Busca Vazia:
+        localStorage.setItem('currentUserSearch', JSON.stringify(nullSearch));
+    }
+
+    loadWolfSearchArray();
+    
+    // Corrige o Número Atual da Página:
+    localStorage.setItem('currentUserPage', 1);
+
     await loadWolfPosts();
 });
