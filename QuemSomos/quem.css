@@ -188,11 +188,11 @@ main section div p{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-size: 1.125rem;
+    font-size: 1.2rem;
 }
 
 .paw-container p {
-    margin-bottom: 3%;
+    padding-bottom: 10px;
 }
 
 /* ----- FIM DA ESTILIZAÇÃO DO FOOTER ----- */
