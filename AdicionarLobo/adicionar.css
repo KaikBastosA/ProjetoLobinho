@@ -31,13 +31,23 @@ body {
     align-items: center;
 }
 
+label {
+    line-height: 40px;
+    font-weight: 600;
+}
+
+textarea {
+    resize: none;
+    height: clamp(100px, 30vh, 250px);
+}
+
 main {
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex: 1;
+    margin: auto 0;
 }
 
 
@@ -47,6 +57,23 @@ footer {
     background-color: #333;
     display: flex;
     flex-direction: column;
+}
+
+input[type="submit"] {
+    background-color: #2C5680;
+    color: #FFF;
+    width: 15%;
+    min-height: 50px;
+    max-height: 70px;
+    margin-top: 50px;
+    border: 3px solid #2C5680;
+    font-size: 1.5rem;
+    transition: 0.7s all cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+input[type="submit"]:hover {
+    background-color: #FFF;
+    color: #2C5680;
 }
 
 /* ----- ID'S ----- */
@@ -142,12 +169,13 @@ header a:last-child:hover::after {
 .form-container {
     width: 70%;
     min-height: min(60vh, 80%);
+    max-height: 800px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     border: 4px solid #333;
-    margin: 10px 0;
+    margin: 50px 0;
 }
 
 .form-container h1,
@@ -155,8 +183,70 @@ header a:last-child:hover::after {
     width: 90%;
 }
 
+.form-container input[type="submit"] {
+    flex: 2;
+    margin-bottom: 50px;
+}
+
 .form-container h1 {
     text-align: center;
+    font-size: 2rem;
+    margin-top: 54px;
+    margin-bottom: 67px;
+}
+
+.first-form-line-sep {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.gray-input-field {
+    background-color: #E6E6E6;
+}
+
+.borderless {
+    border: none;
+}
+
+.custom-border {
+    border: 1px solid #333;
+}
+
+.box-line {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.box-line:first-of-type :first-child {
+    padding-right: 20px;
+}
+
+.box-line:first-child ~ .box-line {
+    flex-direction: column;
+    gap: 0;
+}
+
+.first-form-line-sep:first-child {
+    flex: 0 0 70%;
+}
+
+
+.form-fields-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.inputs-container {
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 /* -------- FIM DA ESTILIZAÇÃO DO FORMULÁRIO -------- */
