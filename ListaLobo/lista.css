@@ -58,7 +58,7 @@ footer {
 
 #wolf-icon {
     height: 100%;
-    will-change: height;
+    will-change: width, height;
 }
 
 #wolf-icon-link:hover {
@@ -410,6 +410,7 @@ header a:last-child:hover::after {
     font-family: 'Roboto', sans-serif;
     color: #000;
     text-decoration: none;
+    -webkit-user-drag: none;
 }
 
 .current-page {
