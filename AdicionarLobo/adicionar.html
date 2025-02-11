@@ -10,13 +10,13 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Darker+Grotesque:wght@300..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
-    <title>Lista dos Nossos Lobinhos</title>
+    <title>Adicionar Lobinho</title>
 </head>
 
 <body>
     <header>
         <div class="header-container">
-            <a href=".\lista.html">Nossos Lobinhos</a>
+            <a href="..\ListaLobo\lista.html">Nossos Lobinhos</a>
             <a href="..\HomePage\home.html" id="wolf-icon-link">
                 <img src="..\Arquivos e Imagens\Lobo.png" alt="Ícone de Lobo do Site" id="wolf-icon"/>
             </a>
@@ -24,7 +24,32 @@
         </div>
     </header>
 
-    <main></main>
+    <main>
+        <form class="form-container">
+            <h2 class="form-title">Coloque um Lobinho para Adoção</h2>
+            <div class="form-fields-container">
+                <div class="box-line">
+                    <div class="first-form-line-sep">
+                        <label for="wolf-name">Nome do Lobinho</label>
+                        <input type="text" name="wolf-name" required/>
+                    </div>
+                    <div class="first-form-line-sep">
+                        <label for="wolf-age">Anos:</label>
+                        <input type="number" name="wolf-age" required/>
+                    </div>
+                </div>
+                <div class="box-line">
+                    <label for="wolf-pic">Link da Foto:</label>
+                    <input type="text" name="wolf-pic" required />
+                </div>
+                <div class="box-line">
+                    <label for="wolf-desc">Descrição</label>
+                    <textarea name="wolf-desc" id="wolf-desc" required></textarea>
+                </div>
+            </div>
+            <input type="submit">
+        </form>
+    </main>
 
     <footer>
         <div class="division-bar"></div>

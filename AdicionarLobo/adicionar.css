@@ -58,7 +58,7 @@ footer {
 
 #wolf-icon {
     height: 100%;
-    will-change: height;
+    will-change: width, height;
 }
 
 #wolf-icon-link:hover {
