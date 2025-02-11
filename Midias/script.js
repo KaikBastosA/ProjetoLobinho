@@ -1,5 +1,5 @@
 let serverPath = String(window.location.href);
-let relativePathWolfJson = "/Arquivos e Imagens/lobinhos.json"
+let relativePathWolfJson = "/Midias/lobinhos.json"
 
 function getSubstringPosition(string, subString, nth_occur) {
     return string.split(subString, nth_occur).join(subString).length;

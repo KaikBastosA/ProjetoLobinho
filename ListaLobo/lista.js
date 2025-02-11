@@ -1,4 +1,4 @@
-import { inicializarLocalStorage } from '../Arquivos e Imagens/script.js'
+import { inicializarLocalStorage } from '../Midias/script.js'
 
 // TODO: REMOVER CHECKED E SEARCH DO LOCAL STORAGE AO ACESSAR ADOTAR LOBINHO
 
