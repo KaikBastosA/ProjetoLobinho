@@ -81,7 +81,7 @@ header a:last-child:hover::after {
     justify-content: center;
     align-items: center;
     text-align: center;
-    background-image: url(../Arquivos\ e\ Imagens/banner2.jpg);
+    background-image: url(../Midias/banner2.jpg);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -363,7 +363,7 @@ header a:last-child:hover::after {
     height: auto;
     display: flex;
     justify-content: flex-start;
-    position: relative; /* Adicione esta linha */
+    position: relative;
     z-index: 2;
 }
 
