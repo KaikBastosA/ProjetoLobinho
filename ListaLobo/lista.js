@@ -65,7 +65,11 @@ async function loadWolfPosts() {
 
     for (let index = 0; index < numberOfWolvesPerPage; index++) {
         let currentWolf = wolfsArray[pageOffset * numberOfWolvesPerPage + index];
-        wolfsPostContainer.append(createWolfArticle(currentWolf));
+        
+        // Limite Máximo Alcançado:
+        if (currentWolf === undefined) return;
+
+        wolfsPostContainer?.append(createWolfArticle(currentWolf));
     }
 
     return;
@@ -79,8 +83,6 @@ async function wolfListMain() {
 
     // Carrega Todos os Posts de Lobo da Respectiva Página:
     await loadWolfPosts();
-
-    // console.log(JSON.parse(localStorage.getItem('lobos')));
 
     // Adiciona a Barra de Paginação da Página Atual:
     document.querySelector("main").append(createPaginationBar());
