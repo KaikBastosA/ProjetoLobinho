@@ -258,17 +258,17 @@ header a:last-child:hover::after {
     height: 5px;
     background: linear-gradient(to right, #DEB959, #2C5680);
 }
-
 .footer-content-container {
+    background-color: #333333;
     flex: 1;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    color: #FFF;
-    /* gap: clamp(20px, 10vw, 300px); */
+    color: #ffffff;
+    padding-top: 6vh;
+    padding-bottom: 6vh;
 }
-
 .location-information-container {
     display: flex;
     height: 70%;
@@ -278,54 +278,57 @@ header a:last-child:hover::after {
     max-width: 25%;
     gap: 10%;
     margin-left: 2%;
-    margin-right: 10%;
+    margin-right: 15%;
 }
-
 .location-information-container div {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
+    padding-bottom: 20px;
 }
-
 .location-information-container div img {
-    width: 14px;
-    height: 14px;
+    width: 16px;
+    height: 16px;
 }
-
 .location-information-container div p {
     font-weight: 200;
     line-height: 20px;
-    font-size: 0.8rem;
+    font-size: 1.125rem;
 }
-
 .footer-content-container iframe {
-    width: clamp(200px, 20%, 350px);
+    width: clamp(251px, 20%, 172px);
     height: 70%;
 }
-
 .location-information-container button {
     width: fit-content;
     height: 25%;
     margin-top: auto;
 }
-
+.location-information-container a {
+    padding-bottom: 5px;
+    font-size: 1.3rem;
+}
 .Who-we-are {
     background-color: #DEB959;
     color: #353535;
-    font-weight: 400;
+    font-size: 20px;
     text-decoration: none;
     font-weight: 800;
     padding: 0 10px;
     margin-top: auto;
 }
-
 .paw-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    font-size: 1.2rem;
+}
+
+.paw-container p {
+    padding-bottom: 10px;
 }
 
 /* ----- FIM DA ESTILIZAÇÃO DO FOOTER ----- */
