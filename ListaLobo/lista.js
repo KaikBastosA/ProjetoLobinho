@@ -172,8 +172,8 @@ async function saveWolfObject(wolfArticle) {
         }
     }
 
-    // Define o Primeiro Acesso sendo na Primeira Página:
-    localStorage.setItem('currentUserPage', 1);
+    // // Define o Primeiro Acesso sendo na Primeira Página:
+    // localStorage.setItem('currentUserPage', 1);
 
     // Limpa os Filtros de Busca:
     await clearFilters();
@@ -373,6 +373,7 @@ function createPaginationBar() {
     if (maxNumberPages < currentUserPage) {
         // Página Atual é Menor que o Máximo de Páginas:
         let currentPageNumber = document.createElement("a");
+        currentPageNumber.draggable = false;
         currentPageNumber.href = "./lista.html";
         currentPageNumber.classList.add("page-number-link");
         currentPageNumber.addEventListener("click", (event) => {
@@ -392,6 +393,7 @@ function createPaginationBar() {
     // Cria o Slider para a Esquerda Somente Quando Necessário:
     if (currentUserPage > 1) {
         const leftPageShift = document.createElement("a");
+        leftPageShift.draggable = false;
         leftPageShift.href = "./lista.html";
         leftPageShift.classList.add("page-number-link");
         leftPageShift.innerText = "<<";
@@ -407,6 +409,7 @@ function createPaginationBar() {
     // Se a página atual está distante pelo menos pageOffset da primeira página:
     if (minPageNumber > 1) {
         const leftEllipsis = document.createElement("a");
+        leftEllipsis.draggable = false;
         leftEllipsis.href = "./lista.html";
         leftEllipsis.classList.add("page-number-link");
         leftEllipsis.addEventListener("click", () => {
@@ -421,16 +424,17 @@ function createPaginationBar() {
     
     for (let pag = minPageNumber; pag <= maxPageNumber; pag++) {
         let currentPageNumber = document.createElement("a");
+        currentPageNumber.draggable = false;
         currentPageNumber.href = "./lista.html";
         currentPageNumber.classList.add("page-number-link");
 
         // Adiciona o Marcador de Página Atual
-        if (currentUserPage === pag) {
-            currentPageNumber.classList.add("current-page");
-        }
+        if (currentUserPage === pag) currentPageNumber.classList.add("current-page");
 
         currentPageNumber.innerText = pag;
         currentPageNumber.addEventListener("click", (event) => {
+            // Se a Página Atual Corresponder à Página Clicada, não Recarrega a Página:
+            if (currentUserPage === pag) event.preventDefault();
             // Marca a Nova Página a ser Carregada:
             localStorage.setItem('currentUserPage', event.target.innerText);
         });
@@ -440,6 +444,7 @@ function createPaginationBar() {
     
     if (maxPageNumber < maxNumberPages) {
         const rightEllipsis = document.createElement("a");
+        rightEllipsis.draggable = false;
         rightEllipsis.href = "./lista.html";
         rightEllipsis.classList.add("page-number-link");
         rightEllipsis.addEventListener("click", () => {
@@ -455,6 +460,7 @@ function createPaginationBar() {
     // Cria o Slider para a Direita Somente Quando Necessário:
     if (currentUserPage < maxNumberPages) {
         const rightPageShift = document.createElement("a");
+        rightPageShift.draggable = false;
         rightPageShift.href = "./lista.html";
         rightPageShift.classList.add("page-number-link");
         rightPageShift.innerText = ">>";
