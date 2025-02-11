@@ -146,7 +146,7 @@ input.linha {
 }
 
 input.linha-pequena {
-    width: 50px;
+    width: 100%;
     text-align: center;
 }
 
@@ -170,17 +170,43 @@ input.linha-pequena:focus {
 /* Layout para os itens */
 .item1 {
     display: flex;
-    gap: 100px;
-    margin-bottom: 10px;
+    align-items: start;
+    gap: 60px;
+    margin: 30px 0;
+}
+
+
+.item1 img{
+    width: 200px;
+    height: 200px;
 }
 
 .item1 h1 {
-    font-size: 40px;
+    font-size: 3.75rem;
+    align-items: start;
+}
+
+.item1 p {
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-family: Darker Grotesque;
 }
 
 .item3 {
     display: flex;
+    margin: 5% 0;
     gap: 10px;
+}
+
+.item3 .Nome label{
+    font-size: 1.875rem;
+    margin-bottom: 20px;
+}
+
+.item3 .Idade label {
+    font-size: 1.875rem;
+    margin-bottom: 20px;
 }
 
 .item3 div {
@@ -199,22 +225,31 @@ input.linha-pequena:focus {
     gap: 10px;
 }
 
+.item4 label {
+    font-size: 1.875rem;
+    margin-bottom: 20px;
+}
+
 /* Estilo do botão "adotar" */
 .adote-button {
+    font-family: Darker Grotesque;
     background-color: #2C5680;
     color: white;
-    font-size: 20px;
+    font-size: 2.25rem;
     text-decoration: none;
-    font-weight: 800;
-    padding: 10px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    width: 150px;
+    font-weight: 600;
+    margin: 10% 0;
+    width: 210px;
+    height: 60px;
+    padding: 0 20px;
     align-self: center;
 }
 
 .adote-button:hover {
-    border: 5px solid #85CDF5;
+    background: #5188c0;
+    cursor: pointer;
+    scale: 1.1;
+    transition: 0.5s;
 }
 
 /* Barra de divisão */
