@@ -3,15 +3,53 @@ import { inicializarLocalStorage } from '../Arquivos e Imagens/script.js'
 const pageOffset = 2;
 const numberOfWolvesPerPage = 4;
 
+const nullSearch = {
+    searchFlag: false,
+    searchContent: null,
+    searchResult: null,
+    searchResultFiltered: null
+};
+
 // Define o Primeiro Acesso sendo na Primeira Página
 if (!localStorage.getItem('currentUserPage')) localStorage.setItem('currentUserPage', 1);
 
 // Define o Valor Padrão para a Barra de Busca:
-if (!localStorage.getItem('currentUserSearch')) localStorage.setItem('currentUserSearch', JSON.stringify({
-                                                                        searchFlag: false,
-                                                                        searchContent: null,
-                                                                        searchResult: null
-                                                                    }));
+if (!localStorage.getItem('currentUserSearch')) localStorage.setItem('currentUserSearch', JSON.stringify(nullSearch));
+
+/* TODO: ATUALIZAR MAX USER PAGES */
+
+function loadWolfSearchArray() {
+    const currentUserSearch = JSON.parse(localStorage.getItem('currentUserSearch'));
+
+    // Erro!
+    if (currentUserSearch.searchFlag === false ||
+        currentUserSearch.searchContent === null) return null;
+
+    // Array de Busca já Existe:
+    if (currentUserSearch.searchResult !== null) return currentUserSearch.searchResult;
+
+    let wolfArray = JSON.parse(localStorage.getItem('lobos'));
+
+    wolfArray = wolfArray.filter((wolf) => wolf.nome.toLowerCase().startsWith(currentUserSearch.searchContent.toLowerCase()));
+
+    // Armazena o Resultado da Pesquisa:
+    currentUserSearch.searchResult = wolfArray;
+    localStorage.setItem('currentUserSearch', JSON.stringify(currentUserSearch));
+}
+
+
+function updateMaxNumberOfPages(wolfArray) {
+    localStorage.setItem('maxNumberPages',
+        Math.ceil(wolfArray.length / numberOfWolvesPerPage));
+    return;
+}
+
+
+async function clearFilters() {
+    // Resetando Filtros de Busca:
+    localStorage.setItem('currentUserSearch', JSON.stringify(nullSearch));
+    localStorage.setItem('checked', false);
+}
 
 
 async function initLocalStorageWolfList() {
@@ -22,7 +60,7 @@ async function initLocalStorageWolfList() {
     if (localStorage.getItem('maxNumberPages')) return;
     
     // Máximo de Páginas Indefinido:
-    let wolfsArray = JSON.parse(localStorage.getItem('lobos'));
+    let wolfArray = JSON.parse(localStorage.getItem('lobos'));
     let currentUserSearch = JSON.parse(localStorage.getItem('currentUserSearch'));
     
     let newMaxUserPages;
@@ -31,45 +69,84 @@ async function initLocalStorageWolfList() {
         if (currentUserSearch.searchContent === null) return;
 
         if (currentUserSearch.searchResult === null) {
-            wolfsArray = wolfsArray.filter((wolf) => wolf.nome === currentUserSearch.searchContent);
-            newMaxUserPages = Math.ceil(wolfsArray.length / numberOfWolvesPerPage);
+            wolfArray = wolfArray.filter((wolf) => wolf.nome === currentUserSearch.searchContent);
+            newMaxUserPages = Math.ceil(wolfArray.length / numberOfWolvesPerPage);
 
             // Armazena o Resultado da Pesquisa:
-            currentUserSearch.searchResult = wolfsArray;
+            currentUserSearch.searchResult = wolfArray;
             localStorage.setItem('currentUserSearch', JSON.stringify(currentUserSearch));
         } else {
-            wolfsArray = currentUserSearch.searchResult;
+            wolfArray = currentUserSearch.searchResult;
         }
     } else {
-        newMaxUserPages = Math.ceil(wolfsArray.length / numberOfWolvesPerPage);        
+        newMaxUserPages = Math.ceil(wolfArray.length / numberOfWolvesPerPage);        
     }
     
-    newMaxUserPages = Math.ceil(wolfsArray.length / numberOfWolvesPerPage);
+    newMaxUserPages = Math.ceil(wolfArray.length / numberOfWolvesPerPage);
     localStorage.setItem('maxNumberPages', newMaxUserPages);
 }
 
 
 async function loadWolfPosts() {
     const wolfsPostContainer = document.querySelector(".wolf-posts-container");
-    let wolfsArray;
-
-    const currentUserSearch = JSON.parse(localStorage.getItem('currentUserSearch'));
-
-    if (currentUserSearch.searchFlag === true) {
-        wolfsArray = currentUserSearch.searchResult;
-    } else {
-        wolfsArray = JSON.parse(localStorage.getItem('lobos'));
-    }
+    
+    // Esvazia o Conteúdo Prévio:
+    wolfsPostContainer.innerHTML = "";
+    
+    const wolfArray = await getCurrentWolfArray();
+    
+    // console.log("wolf retornado: ", wolfArray);
+    
+    // Atualiza o Número Máximo de Páginas:
+    updateMaxNumberOfPages(wolfArray);
 
     let pageOffset = Number(localStorage.getItem('currentUserPage')) - 1;
 
     for (let index = 0; index < numberOfWolvesPerPage; index++) {
-        let currentWolf = wolfsArray[pageOffset * numberOfWolvesPerPage + index];
+        let currentWolf = wolfArray[pageOffset * numberOfWolvesPerPage + index];
         
         // Limite Máximo Alcançado:
-        if (currentWolf === undefined) return;
+        if (currentWolf === undefined) break;
 
         wolfsPostContainer?.append(createWolfArticle(currentWolf));
+    }
+
+    // Elimina a Barra de Paginação Antiga, se Existir:
+    const paginationSection = document.querySelector(".pagination-section");
+    paginationSection?.remove();
+
+    // Adiciona a Barra de Paginação da Página Atual:
+    document.querySelector("main").append(createPaginationBar());
+
+    return;
+}
+
+
+async function createFilteredWolfList() {
+    const currentUserSearch = JSON.parse(localStorage.getItem('currentUserSearch'));
+    let wolfSearchArray;
+
+    if (currentUserSearch.searchFlag) {
+        // Lista Filtrada de Pesquisa já Existe:
+        if (currentUserSearch.searchResultFiltered !== null) return;
+
+        // Criando Lista de Lobos Filtrada:
+        wolfSearchArray = loadWolfSearchArray();
+
+        wolfSearchArray = wolfSearchArray?.filter(elem => elem.adotado === true);
+
+        currentUserSearch.searchResultFiltered = wolfSearchArray;
+
+        // Armazena o Resultado da Filtragem no Local Storage:
+        localStorage.setItem('currentUserSearch', JSON.stringify(currentUserSearch));
+        
+    } else {
+        wolfSearchArray = JSON.parse(localStorage.getItem('lobos'));
+
+        wolfSearchArray = wolfSearchArray?.filter(elem => elem.adotado === true);
+
+        // Armazena o Resultado da Filtragem no Local Storage:
+        localStorage.setItem('lobosAdotados', JSON.stringify(wolfSearchArray));
     }
 
     return;
@@ -81,13 +158,67 @@ async function wolfListMain() {
     // da Limitação de Páginas e do Conteúdo dos Lobinhos:
     await initLocalStorageWolfList();
 
+    let filterFlag = localStorage.getItem('checked');
+    if (filterFlag === null) {
+        filterFlag = "false";
+        localStorage.setItem('checked', false);
+    }
+
+    // Recupera o Estado do Filtro:
+    document.querySelector(".wolf-filter").checked = filterFlag === "true" ? true : false;
+
     // Carrega Todos os Posts de Lobo da Respectiva Página:
     await loadWolfPosts();
-
-    // Adiciona a Barra de Paginação da Página Atual:
-    document.querySelector("main").append(createPaginationBar());
 }
+
+
+async function getCurrentWolfArray() {
+    const currentUserSearch = JSON.parse(localStorage.getItem('currentUserSearch'));
+    const filterCheckBox = localStorage.getItem('checked');
+
+    if (currentUserSearch.searchFlag === true) {
+        if (filterCheckBox === "true") {
+            await createFilteredWolfList();
+            console.log("retornou: ", currentUserSearch.searchResultFiltered);
+            return currentUserSearch.searchResultFiltered;
+        }
+        console.log("retornou: ", currentUserSearch.searchResult);
+        return currentUserSearch.searchResult;
+    } else {
+        if (filterCheckBox === "true") {
+            await createFilteredWolfList();
+            console.log("retornou: ", JSON.parse(localStorage.getItem('lobosAdotados')));
+            return JSON.parse(localStorage.getItem('lobosAdotados'));
+        }
+        console.log("retornou: ", JSON.parse(localStorage.getItem('lobos')));
+        return JSON.parse(localStorage.getItem('lobos'));
+    }
+}
+
+
+async function saveWolfObject(wolfArticle) {
+    const wolfPostsContainer = document.querySelector(".wolf-posts-container").children;
+    const wolfArray = await getCurrentWolfArray();
+
     
+    for (let index = 0; index < wolfPostsContainer.length; index++) {
+        console.log(wolfArticle, wolfPostsContainer[index]);
+        if (wolfPostsContainer[index] == wolfArticle) {
+            const wolfIndex = (Number(localStorage.getItem('currentUserPage')) - 1) * numberOfWolvesPerPage + index;
+            const selectedWolf = wolfArray[wolfIndex];
+            
+            localStorage.setItem('selectedWolfObject', JSON.stringify(selectedWolf));
+            break;
+        }
+    }
+    
+    // Reinicia o Contador de Páginas:
+    localStorage.setItem('currentUserPage', 1);
+
+    // Limpa o Filtro de Busca:
+    localStorage.setItem('currentUserSearch', JSON.stringify(nullSearch));
+}
+
 
 function createWolfArticle({nome, idade, descricao, imagem, adotado, nomeDono}) {
     // Criando o Elemento Article:
@@ -113,6 +244,12 @@ function createWolfArticle({nome, idade, descricao, imagem, adotado, nomeDono}) 
     if (adotado === true) {
         wolfPageLink.addEventListener("click", (event) => {
             event.preventDefault();
+        });
+    } else {
+        wolfPageLink.addEventListener("click", async (event) => {
+            let articleClicked = event.target.parentElement.parentElement.parentElement;
+            await saveWolfObject(articleClicked);
+            await clearFilters();
         });
     }
 
@@ -149,6 +286,12 @@ function createWolfArticle({nome, idade, descricao, imagem, adotado, nomeDono}) 
         wolfPageLink_2.addEventListener("click", (event) => {
             event.preventDefault();
         });
+    } else {
+        wolfPageLink_2.addEventListener("click", async (event) => {
+            let articleClicked = event.target.parentElement.parentElement.parentElement.parentElement.parentElement;
+            await saveWolfObject(articleClicked);
+            await clearFilters();
+        });
     }
 
     const wolfName = document.createElement("h2");
@@ -178,6 +321,12 @@ function createWolfArticle({nome, idade, descricao, imagem, adotado, nomeDono}) 
     if (adotado === true) {
         adoptButtonLink.addEventListener("click", (event) => {
             event.preventDefault();
+        });
+    } else {
+        adoptButtonLink.addEventListener("click", async (event) => {
+            let articleClicked = event.target.parentElement.parentElement.parentElement.parentElement;
+            await saveWolfObject(articleClicked);
+            await clearFilters();
         });
     }
 
@@ -313,5 +462,19 @@ function createPaginationBar() {
     return paginationSection;
 }
 
+async function saveToggleFilterCheckbox() {
+    const checked = document.querySelector(".wolf-filter").checked;
+    localStorage.setItem('checked', checked);
+    localStorage.setItem('currentUserPage', 1);
+
+    return;
+}
+
+// Inicializa os Dados dos Lobos:
 wolfListMain();
 
+document.querySelector(".wolf-filter").addEventListener("click", async () => {
+    await saveToggleFilterCheckbox();
+    await createFilteredWolfList();
+    await loadWolfPosts();
+});
