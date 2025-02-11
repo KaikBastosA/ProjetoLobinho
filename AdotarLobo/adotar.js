@@ -9,15 +9,6 @@ const wolfName = document.querySelector(".item2");
 wolfName.children[0].innerText = `Adote o(a) ${lobinhoObjeto.nome}`;
 wolfName.children[1].innerText = `id: ${lobinhoObjeto.id}`;
 
-// console.log(lobos);
-
-const wolfName = document.querySelector(".item2");
-
-wolfName.children[0].innerText = `Adote o(a) ${lobinhoObjeto.nome}`;
-wolfName.children[1].innerText = `id: ${lobinhoObjeto.id}`;
-
-// console.log(lobos);
-
 //atualizalção do arquivo JSON
 // locasStorage.setItem('lobos', JSON.stringify(lobos));
 
