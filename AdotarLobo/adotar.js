@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         localStorage.setItem('lobos', JSON.stringify(lobos));
 
-        alert("Dados enviados com sucesso!");
+        alert("Lobinho adotado com sucesso!");
     });
 });
 
