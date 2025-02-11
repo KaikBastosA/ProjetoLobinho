@@ -52,7 +52,7 @@ footer {
 /* ----- ID'S ----- */
 
 #wolf-icon-link {
-    height: 70%;
+    height: 90%;
     transition: height 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
@@ -62,7 +62,7 @@ footer {
 }
 
 #wolf-icon-link:hover {
-    height: 90%;
+    height: 100%;
 }
 
 
