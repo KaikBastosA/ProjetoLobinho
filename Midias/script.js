@@ -9,7 +9,6 @@ export async function inicializarLocalStorage() {
     if (localStorage.getItem('lobos')) return;
 
     try {
-        console.log(String(serverPath.substring(0, getSubstringPosition(serverPath, '/', 3))) + relativePathWolfJson)
         const response = await fetch(String(serverPath.substring(0, getSubstringPosition(serverPath, '/', 3))) + relativePathWolfJson);
         if (!response.ok) {
             throw new Error(`Erro ao buscar lobinho.json: ${response.statusText}`);
