@@ -26,30 +26,28 @@
 
     <main>
         <form class="form-container">
-            <h1 class="form-title">Coloque um Lobinho para Adoção</h1>
-            <div class="inputs-container">
-                <div class="form-fields-container">
-                    <div class="box-line">
-                        <div class="first-form-line-sep">
-                            <label for="wolf-name">Nome do Lobinho</label>
-                            <input type="text" name="wolf-name" class="gray-input-field borderless custom-border" required/>
-                        </div>
-                        <div class="first-form-line-sep">
-                            <label for="wolf-age">Anos:</label>
-                            <input type="number" name="wolf-age" class="gray-input-field borderless custom-border" required/>
-                        </div>
+            <h2 class="form-title">Coloque um Lobinho para Adoção</h2>
+            <div class="form-fields-container">
+                <div class="box-line">
+                    <div class="first-form-line-sep">
+                        <label for="wolf-name">Nome do Lobinho</label>
+                        <input type="text" name="wolf-name" required/>
                     </div>
-                    <div class="box-line">
-                        <label for="wolf-pic">Link da Foto:</label>
-                        <input type="text" name="wolf-pic" class="gray-input-field borderless custom-border" required />
-                    </div>
-                    <div class="box-line">
-                        <label for="wolf-desc">Descrição</label>
-                        <textarea name="wolf-desc" id="wolf-desc" class="gray-input-field borderless custom-border" required></textarea>
+                    <div class="first-form-line-sep">
+                        <label for="wolf-age">Anos:</label>
+                        <input type="number" name="wolf-age" required/>
                     </div>
                 </div>
+                <div class="box-line">
+                    <label for="wolf-pic">Link da Foto:</label>
+                    <input type="text" name="wolf-pic" required />
+                </div>
+                <div class="box-line">
+                    <label for="wolf-desc">Descrição</label>
+                    <textarea name="wolf-desc" id="wolf-desc" required></textarea>
+                </div>
             </div>
-            <input type="submit" value="Salvar">
+            <input type="submit">
         </form>
     </main>
 
