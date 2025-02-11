@@ -73,6 +73,21 @@ header a:last-child:hover::after {
     padding-top: 0.75%;
 }
 
+#wolf-icon-link {
+    height: 90%;
+    margin-bottom: 10px;
+    transition: height 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+#wolf-icon {
+    height: 100%;
+    will-change: width, height;
+}
+
+#wolf-icon-link:hover {
+    height: 100%;
+}
+
 .banner{
     width: 100%;
     height: 700px;

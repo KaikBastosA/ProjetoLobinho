@@ -1,103 +1,32 @@
+/* ----- ESTILIZAÇÃO GLOBAL ----- */
+
 * {
-    padding: 0;
     margin: 0;
-    box-sizing: border-box;
+    padding: 0;
     font-family: "Darker Grotesque", serif;
-    font-optical-sizing: auto;
-    font-style: normal;
-    font-size: clamp(14px, 2vw, 18px);
 }
-
-html {
-    width: 100vw;
-    height: 100vh;
-    overflow-x: hidden;
-}
-
-header {
-    width: 100%;
-    height: clamp(100px, 10vh, 200px);
-    background-color: #85CDF5;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
-
-body {
-    width: 100%;
+html, body {
     height: 100%;
+    margin: 0;
     display: flex;
     flex-direction: column;
-    align-items: center;
-}
-
-label {
-    line-height: 40px;
-    font-weight: 600;
-}
-
-textarea {
-    resize: none;
-    height: clamp(100px, 30vh, 250px);
 }
 
 main {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: auto 0;
+    flex: 1;
 }
 
-
-footer {
-    width: 100%;
-    min-height: clamp(250px, 20vh, 300px);
-    background-color: #333;
-    display: flex;
-    flex-direction: column;
-}
-
-input[type="submit"] {
-    background-color: #2C5680;
-    color: #FFF;
-    width: 15%;
-    min-height: 50px;
-    max-height: 70px;
-    margin-top: 50px;
-    border: 3px solid #2C5680;
-    font-size: 1.5rem;
-    transition: 0.7s all cubic-bezier(0.075, 0.82, 0.165, 1);
-}
-
-input[type="submit"]:hover {
-    background-color: #FFF;
-    color: #2C5680;
-}
-
-/* ----- ID'S ----- */
-
-#wolf-icon-link {
-    height: 70%;
-    transition: height 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-#wolf-icon {
-    height: 100%;
-    will-change: width, height;
-}
-
-#wolf-icon-link:hover {
-    height: 90%;
-}
-
-/* ---------------- */
-
+/* ----- FIM DA ESTILIZAÇÃO GLOBAL ----- */
 
 /* ----- ESTILIZAÇÃO HEADER ----- */
+
+header {
+    justify-items: center;
+    background-color: #85CDF5;
+}
+
 header a {
-    color: #333;
+    color: #333333;
     text-decoration: none;
     font-size: 1.875rem;
     font-weight: 700;
@@ -105,11 +34,6 @@ header a {
 
 header a:first-child {
     position: relative;
-}
-
-.search-bar-container a {
-    width: 10%;
-    height: 100%;
 }
 
 header a:first-child::after {
@@ -122,19 +46,17 @@ header a:first-child::after {
     display: block;
     width: 0;
     height: 4px;
-    background-color: #333;
+    background-color: #333333;
     transition: 1s all cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 header a:first-child:hover::after {
     width: 70%;
 }
-
 header a:last-child {
     position: relative;
     direction: rtl;
 }
-
 header a:last-child::after {
     content: "";
     text-align: right;
@@ -145,14 +67,13 @@ header a:last-child::after {
     display: block;
     width: 0%;
     height: 4px;
-    background-color: #333;
+    background-color: #333333;
     transition: 1s all cubic-bezier(0.175, 0.885, 0.32, 1.275); 
 }
 
 header a:last-child:hover::after {
     width: 70%;
 }
-
 .header-container {
     display: flex;
     flex-direction: row;
@@ -160,96 +81,121 @@ header a:last-child:hover::after {
     align-items: center;
     gap: 20%;
     width: 70%;
+    padding-top: 0.75%;
 }
 
-/* ---------- FIM DA ESTILIZAÇÃO DO HEADER ---------- */
+/* ----- FIM DA ESTILIZAÇÃO DO HEADER ----- */
 
-/* -------- ESTILIZAÇÃO DO FORMULÁRIO -------- */
 
-.form-container {
-    width: 70%;
-    min-height: min(60vh, 80%);
-    max-height: 800px;
+/* ----- ESTILIZAÇÃO DA MAIN ----- */
+
+main {
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    border: 4px solid #333;
-    margin: 50px 0;
+    align-items: center;
 }
 
-.form-container h1,
-.form-container div {
-    width: 90%;
+main .wolf-name {
+    margin-top: 6vh;
+    margin-bottom: 6vh;
+    font-size: 2.25rem;
 }
 
-.form-container input[type="submit"] {
-    flex: 2;
-    margin-bottom: 50px;
+main .main-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 3vw;
+    margin-bottom: 5vh;
 }
 
-.form-container h1 {
-    text-align: center;
-    font-size: 2rem;
-    margin-top: 54px;
-    margin-bottom: 67px;
-}
-
-.first-form-line-sep {
+.main-left-container {
     display: flex;
     flex-direction: column;
+    row-gap: 6vh;
 }
 
-
-.gray-input-field {
-    background-color: #E6E6E6;
+.main-left-container .image-container {
+    width: 430px;
+    height: 328px;
+    position: relative;
 }
 
-.borderless {
+.main-left-container img {
+    width: 100%;
+    height: 100%;
+}
+
+.main-left-container .image-container .back-square {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    background-color: #2C5680;
+    z-index: -1;
+    transform: translate(-41px,-33px);
+    border: 4px solid #333333;
+}
+
+.main-left-bottom-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.main-left-bottom-container .adopt {
+    width: 180px;
+    height: 56px;
+    background-color: #7AAC3A;
+    color: #ffffff;
+    font-size: 1.125rem;
+    font-weight: 900;
     border: none;
 }
 
-.custom-border {
-    border: 1px solid #333;
+.main-left-bottom-container .delete {
+    width: 180px;
+    height: 56px;
+    background-color: #DE5959;
+    color: #ffffff;
+    font-size: 1.125rem;
+    font-weight: 900;
+    border: none;
 }
 
-.box-line {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
+.main-left-bottom-container .adopt:active {
+    color: #b4b4b4;
+    border: 2px solid #577a29 ;
 }
 
-.box-line:first-of-type :first-child {
-    padding-right: 20px;
+.main-left-bottom-container .delete:active {
+    color: #b4b4b4;
+    border: 2px solid #ac4545;
 }
 
-.box-line:first-child ~ .box-line {
-    flex-direction: column;
-    gap: 0;
-}
-
-.first-form-line-sep:first-child {
-    flex: 0 0 70%;
-}
-
-
-.form-fields-container {
+.main-right-container {
     display: flex;
     flex-direction: column;
+
+    width: 478px;
+    height: 497px;
+    text-align: left;
     justify-content: center;
     align-items: center;
-    gap: 20px;
+    font-size: 1.5rem;
 }
 
-.inputs-container {
-    height: fit-content;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.main-right-container p {
+    max-height: 93%;
+    overflow-y: scroll;
 }
 
-/* -------- FIM DA ESTILIZAÇÃO DO FORMULÁRIO -------- */
+
+
+/* ----- FIM DA ESTILIZAÇÃO DA MAIN ----- */
+
 
 /* ----- ESTILIZAÇÃO DO FOOTER ----- */
 
@@ -332,4 +278,3 @@ header a:last-child:hover::after {
 }
 
 /* ----- FIM DA ESTILIZAÇÃO DO FOOTER ----- */
-
