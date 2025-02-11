@@ -69,6 +69,7 @@ input[type="submit"] {
     border: 3px solid #2C5680;
     font-size: 1.5rem;
     transition: 0.7s all cubic-bezier(0.075, 0.82, 0.165, 1);
+    cursor: pointer;
 }
 
 input[type="submit"]:hover {
