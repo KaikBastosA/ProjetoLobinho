@@ -11,6 +11,9 @@ discLobo.innerText = lobinhoObjeto.descricao
 
 // ----------------------------------------------------------- //
 
-let loboStorage = JSON.parse(localStorage.getItem('lobos'))
-loboStorage = loboStorage.filter(index => index.id !== lobinhoObjeto.id)
-localStorage.setItem("lobos", JSON.stringify(loboStorage))
+document.querySelector("#excluir-lobo").addEventListener("click", () => {
+    let loboStorage = JSON.parse(localStorage.getItem('lobos'));
+    loboStorage = loboStorage.filter(index => index.id !== lobinhoObjeto.id);
+    localStorage.setItem("lobos", JSON.stringify(loboStorage));
+});
+
