@@ -4,6 +4,13 @@ const lobinhoObjeto = JSON.parse(localStorage.getItem('selectedWolfObject'));
 let wolfprofile = document.querySelector(".main-img");
 wolfprofile.src = lobinhoObjeto.imagem;
 
+const wolfName = document.querySelector(".item2");
+
+wolfName.children[0].innerText = `Adote o(a) ${lobinhoObjeto.nome}`;
+wolfName.children[1].innerText = `id: ${lobinhoObjeto.id}`;
+
+// console.log(lobos);
+
 //atualizalção do arquivo JSON
 // locasStorage.setItem('lobos', JSON.stringify(lobos));
 
@@ -71,6 +78,17 @@ document.addEventListener("DOMContentLoaded", function () {
         nomeinput.value = "";
         emailinput.value = "";
         agenumber.value = "";
+
+        const lobos = JSON.parse(localStorage.getItem('lobos'));
+
+        for(let elem of lobos) {
+            if (elem.id === lobinhoObjeto.id) {
+                elem.adotado = true;
+                break;
+            }
+        }
+
+        localStorage.setItem('lobos', JSON.stringify(lobos));
 
         alert("Dados enviados com sucesso!");
     });
