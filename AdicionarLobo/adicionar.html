@@ -32,24 +32,24 @@
                     <div class="box-line">
                         <div class="first-form-line-sep">
                             <label for="wolf-name">Nome do Lobinho</label>
-                            <input type="text" name="wolf-name" class="gray-input-field borderless custom-border" required/>
+                            <input type="text" name="wolf-name" class="gray-input-field borderless custom-border" id="wolf-name" required/>
                         </div>
                         <div class="first-form-line-sep">
                             <label for="wolf-age">Anos:</label>
-                            <input type="number" name="wolf-age" class="gray-input-field borderless custom-border" required/>
+                            <input type="number" name="wolf-age" class="gray-input-field borderless custom-border" id="wolf-age" required/>
                         </div>
                     </div>
                     <div class="box-line">
                         <label for="wolf-pic">Link da Foto:</label>
-                        <input type="text" name="wolf-pic" class="gray-input-field borderless custom-border" required />
+                        <input type="text" name="wolf-pic" class="gray-input-field borderless custom-border" id="wolf-profile-picture" required />
                     </div>
                     <div class="box-line">
                         <label for="wolf-desc">Descrição</label>
-                        <textarea name="wolf-desc" id="wolf-desc" class="gray-input-field borderless custom-border" required></textarea>
+                        <textarea name="wolf-desc" id="wolf-desc" class="gray-input-field borderless custom-border" id="wolf-desc" required></textarea>
                     </div>
                 </div>
             </div>
-            <input type="submit" value="Salvar">
+            <input type="submit" value="Salvar" id="test">
         </form>
     </main>
 
@@ -63,24 +63,25 @@
             
             <div class="location-information-container">
                 <div>
-                    <img src="..\Arquivos e Imagens\placeholder-for-map.png" alt="Ícone de Mapa">
+                    <img src="..\Midias\placeholder-for-map.png" alt="Ícone de Mapa">
                     <p>Av. Milton Tavares de Souza, s/n - Sala 115 B - Boa Viagem, Niterói - RJ, 24210-315</p>
                 </div>
                 <div>
-                    <img src="..\Arquivos e Imagens\call-answer.png" alt="Ícone de Telefone">
+                    <img src="..\Midias\call-answer.png" alt="Ícone de Telefone">
                     <p>(99) 99999-9999</p>
                 </div>
                 <div>
-                    <img src="..\Arquivos e Imagens\envelope.png" alt="Ícone de Envelope">
+                    <img src="..\Midias\envelope.png" alt="Ícone de Envelope">
                     <p>salve-lobos@lobINhos.com</p>
                 </div>
                 <a href="..\QuemSomos\quem.html" class="Who-we-are">Quem Somos</a>
             </div>
             <div class="paw-container">
                 <p>Desenvolvido com</p>
-                <img src="..\Arquivos e Imagens\paws.png" alt="Ícone de uma Pata de Lobo no Formato de um Coração">
+                <img src="..\Midias\paws.png" alt="Ícone de uma Pata de Lobo no Formato de um Coração">
             </div>
         </div>
+        <script src="./adicionar.js"></script>
     </footer>
 </body>
 </html>
