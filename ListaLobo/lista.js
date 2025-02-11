@@ -16,34 +16,14 @@ if (!localStorage.getItem('currentUserPage')) localStorage.setItem('currentUserP
 // Define o Valor Padrão para a Barra de Busca:
 if (!localStorage.getItem('currentUserSearch')) localStorage.setItem('currentUserSearch', JSON.stringify(nullSearch));
 
-/* TODO: ATUALIZAR MAX USER PAGES */
 
-function loadWolfSearchArray() {
-    const currentUserSearch = JSON.parse(localStorage.getItem('currentUserSearch'));
+async function saveToggleFilterCheckbox() {
+    const checked = document.querySelector(".wolf-filter").checked;
+    localStorage.setItem('checked', checked);
+    localStorage.setItem('currentUserPage', 1);
 
-    // Erro!
-    if (currentUserSearch.searchFlag === false ||
-        currentUserSearch.searchContent === null) return null;
-
-    // Array de Busca já Existe:
-    if (currentUserSearch.searchResult !== null) return currentUserSearch.searchResult;
-
-    let wolfArray = JSON.parse(localStorage.getItem('lobos'));
-
-    wolfArray = wolfArray.filter((wolf) => wolf.nome.toLowerCase().startsWith(currentUserSearch.searchContent.toLowerCase()));
-
-    // Armazena o Resultado da Pesquisa:
-    currentUserSearch.searchResult = wolfArray;
-    localStorage.setItem('currentUserSearch', JSON.stringify(currentUserSearch));
-}
-
-
-function updateMaxNumberOfPages(wolfArray) {
-    localStorage.setItem('maxNumberPages',
-        Math.ceil(wolfArray.length / numberOfWolvesPerPage));
     return;
 }
-
 
 async function clearFilters() {
     // Resetando Filtros de Busca:
@@ -217,6 +197,33 @@ async function saveWolfObject(wolfArticle) {
 
     // Limpa o Filtro de Busca:
     localStorage.setItem('currentUserSearch', JSON.stringify(nullSearch));
+}
+
+
+function loadWolfSearchArray() {
+    const currentUserSearch = JSON.parse(localStorage.getItem('currentUserSearch'));
+
+    // Erro!
+    if (currentUserSearch.searchFlag === false ||
+        currentUserSearch.searchContent === null) return null;
+
+    // Array de Busca já Existe:
+    if (currentUserSearch.searchResult !== null) return currentUserSearch.searchResult;
+
+    let wolfArray = JSON.parse(localStorage.getItem('lobos'));
+
+    wolfArray = wolfArray.filter((wolf) => wolf.nome.toLowerCase().startsWith(currentUserSearch.searchContent.toLowerCase()));
+
+    // Armazena o Resultado da Pesquisa:
+    currentUserSearch.searchResult = wolfArray;
+    localStorage.setItem('currentUserSearch', JSON.stringify(currentUserSearch));
+}
+
+
+function updateMaxNumberOfPages(wolfArray) {
+    localStorage.setItem('maxNumberPages',
+        Math.ceil(wolfArray.length / numberOfWolvesPerPage));
+    return;
 }
 
 
@@ -460,14 +467,6 @@ function createPaginationBar() {
     }
 
     return paginationSection;
-}
-
-async function saveToggleFilterCheckbox() {
-    const checked = document.querySelector(".wolf-filter").checked;
-    localStorage.setItem('checked', checked);
-    localStorage.setItem('currentUserPage', 1);
-
-    return;
 }
 
 // Inicializa os Dados dos Lobos:
