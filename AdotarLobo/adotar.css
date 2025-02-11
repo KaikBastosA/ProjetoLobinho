@@ -1,0 +1,131 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    }
+    
+    .container main{
+        flex: 1 1 0;
+        background-color: transparent;
+        border: 0;
+    }
+    .cabecalho{
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly;
+        background-color: #85CDF5;
+        padding: 0 10rem;
+    }
+    
+    .cabecalho nav{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-top: 10px;
+    }
+    
+    .cabecalho ul{
+        display: flex;
+        width: 100%;
+        align-items: center;
+        list-style: none;
+    }
+    
+    .cabecalho li{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .cabecalho a{
+        text-decoration: none;;
+        color: #333333;
+        font-size: 30px;
+        font-weight: 700;
+    }
+    
+    .cabecalho img{
+        width: 88px;
+        height: 110px;
+    }
+
+    .division-bar {
+        width: 100%;
+        height: 5px;
+        background: linear-gradient(to right, #DEB959, #2C5680);
+    }
+    .footer-content-container {
+        background-color: #333333;
+        flex: 1;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        color: #ffffff;
+        gap: clamp(20px, 15.25vw, 300px);
+        padding-top: 6vh;
+        padding-bottom: 6vh;
+    }
+    .location-information-container {
+        display: flex;
+        height: 70%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        max-width: 25%;
+        gap: 10%;
+    }
+    .location-information-container div {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 20px;
+        padding-bottom: 20px;
+    }
+    .location-information-container div img {
+        width: 20px;
+        height: 20px;
+    }
+    .location-information-container div p {
+        font-weight: 200;
+        line-height: 20px;
+        font-size: 1.0rem;
+    }
+    .footer-content-container iframe {
+        width: clamp(251px, 20%, 172px);
+        height: 70%;
+    }
+    .location-information-container button {
+        width: fit-content;
+        height: 25%;
+        margin-top: auto;
+    }
+    .location-information-container a {
+        padding-bottom: 5px;
+        font-size: 1.9rem;
+        
+    }
+    .Who-we-are {
+        background-color: #DEB959;
+        color: #353535;
+        font-size: 20px;
+        text-decoration: none;
+        font-weight: 800;
+        padding: 0 10px;
+        margin-top: auto;
+    }
+    .paw-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    
