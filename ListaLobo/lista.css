@@ -16,7 +16,6 @@ html {
 
 header {
     width: 100%;
-    height: clamp(100px, 10vh, 200px);
     background-color: #85CDF5;
     display: flex;
     flex-direction: row;
@@ -64,7 +63,6 @@ footer {
 #wolf-icon-link:hover {
     height: 100%;
 }
-
 
 #wolf-search-bar {
     border: none;
