@@ -97,17 +97,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         localStorage.setItem('lobos', JSON.stringify(lobos));
 
-        const lobos = JSON.parse(localStorage.getItem('lobos'));
-
-        for (let elem of lobos) {
-            if (elem.id === lobinhoObjeto.id) {
-                elem.adotado = true;
-                break;
-            }
-        }
-
-        localStorage.setItem('lobos', JSON.stringify(lobos));
-
         alert("Dados enviados com sucesso!");
     });
 });
