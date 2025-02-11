@@ -235,6 +235,7 @@ header a:last-child:hover::after {
 }
 
 .wolf-post {
+    width: 100%;
     height: clamp(250px, 5vh, 350px);
     display: flex;
     flex-direction: row;
@@ -247,7 +248,7 @@ header a:last-child:hover::after {
     position: relative;
     max-height: 100%;
     height: 100%;
-    min-width: clamp(200px, 30%, 500px);
+    width: clamp(375px, 20%, 500px);
 }
 
 .background-wolf-image {
@@ -311,8 +312,9 @@ header a:last-child:hover::after {
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content:space-between;
+    justify-content: space-between;
     gap: 20px;
+    flex: 1;
 }
 
 .wolf-name-box p {

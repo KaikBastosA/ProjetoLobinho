@@ -5,9 +5,11 @@ function getSubstringPosition(string, subString, nth_occur) {
     return string.split(subString, nth_occur).join(subString).length;
 }
 
-async function inicializarLocalStorage() {
+export async function inicializarLocalStorage() {
+    if (localStorage.getItem('lobos')) return;
+
     try {
-        const response = await fetch(String(serverPath.substring(0, getSubstringPosition(serverPath, '/', 3) + relativePathWolfJson)));
+        const response = await fetch(String(serverPath.substring(0, getSubstringPosition(serverPath, '/', 3))) + relativePathWolfJson);
         if (!response.ok) {
             throw new Error(`Erro ao buscar lobinho.json: ${response.statusText}`);
         }
@@ -21,12 +23,12 @@ async function inicializarLocalStorage() {
     }
 }
 
-if (!localStorage.getItem('lobos')) {
-    inicializarLocalStorage().then(() => {
-        console.log('Inicialização do localStorage concluída');
-    }).catch(error => {
-        console.error('Erro durante a inicialização do localStorage:', error);
-    });
-}
+
+inicializarLocalStorage().then(() => {
+    console.log('Inicialização do localStorage concluída');
+}).catch(error => {
+    console.error('Erro durante a inicialização do localStorage:', error);
+});
+
 
 
