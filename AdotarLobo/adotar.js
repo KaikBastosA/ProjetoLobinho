@@ -4,6 +4,13 @@ const lobinhoObjeto = JSON.parse(localStorage.getItem('selectedWolfObject'));
 let wolfprofile = document.querySelector(".main-img");
 wolfprofile.src = lobinhoObjeto.imagem;
 
+const wolfName = document.querySelector(".item2");
+
+wolfName.children[0].innerText = `Adote o(a) ${lobinhoObjeto.nome}`;
+wolfName.children[1].innerText = `id: ${lobinhoObjeto.id}`;
+
+// console.log(lobos);
+
 //atualizalção do arquivo JSON
 // locasStorage.setItem('lobos', JSON.stringify(lobos));
 
@@ -18,11 +25,11 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
 
-        //Retira todos os espaços vazios na extremidades
+    //Retira todos os espaços vazios na extremidades
     adotebutton.addEventListener("click", () => {
         let nome = nomeinput.value.trim();
         let email = emailinput.value.trim();
-        let ageValue = agenumber.value.trim(); 
+        let ageValue = agenumber.value.trim();
 
         // Se todos os campos estiverem vazios
         if (nome === "" && email === "" && ageValue === "") {
@@ -40,8 +47,8 @@ document.addEventListener("DOMContentLoaded", function () {
         if (email === "") {
             alert("O e-mail é obrigatório!");
             return;
-        } 
-        
+        }
+
         // Expressão regular para validar um email do Gmail corretamente
         let gmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
         if (!gmailRegex.test(email)) {
@@ -72,6 +79,18 @@ document.addEventListener("DOMContentLoaded", function () {
         emailinput.value = "";
         agenumber.value = "";
 
+        const lobos = JSON.parse(localStorage.getItem('lobos'));
+
+        for (let elem of lobos) {
+            if (elem.id === lobinhoObjeto.id) {
+                elem.adotado = true;
+                break;
+            }
+        }
+
+        localStorage.setItem('lobos', JSON.stringify(lobos));
+
         alert("Dados enviados com sucesso!");
     });
 });
+
