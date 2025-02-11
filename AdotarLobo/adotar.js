@@ -1,3 +1,5 @@
+const lobinhoObjeto = JSON.parse(localStorage.getItem('selectedWolfObject'));
+
 document.addEventListener("DOMContentLoaded", function () {
     const nomeinput = document.getElementById("nomeinput");
     const emailinput = document.getElementById("email");
