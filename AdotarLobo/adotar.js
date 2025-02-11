@@ -1,4 +1,11 @@
+//constroi nosso array de objetos
 const lobinhoObjeto = JSON.parse(localStorage.getItem('selectedWolfObject'));
+
+let wolfprofile = document.querySelector(".main-img");
+wolfprofile.src = lobinhoObjeto.imagem;
+
+//atualizalção do arquivo JSON
+// locasStorage.setItem('lobos', JSON.stringify(lobos));
 
 document.addEventListener("DOMContentLoaded", function () {
     const nomeinput = document.getElementById("nomeinput");
