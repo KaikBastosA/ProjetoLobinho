@@ -97,6 +97,8 @@ document.addEventListener("DOMContentLoaded", function () {
         localStorage.setItem('lobos', JSON.stringify(lobos));
 
         alert("Lobinho adotado com sucesso!");
+        
+        window.location.replace("../ListaLobo/lista.html");
     });
 });
 
