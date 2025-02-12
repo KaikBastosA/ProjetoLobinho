@@ -72,10 +72,19 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
         
+        // 🔹 Limpar os campos após o envio bem-sucedido
+        nomeinput.value = "";
+        emailinput.value = "";
+        agenumber.value = "";
+        
         const lobos = JSON.parse(localStorage.getItem('lobos'));
 
         for(let elem of lobos) {
             if (elem.id === lobinhoObjeto.id) {
+                if (elem.adotado === true) {
+                    alert("Este Lobinho já foi Adotado!");
+                    return;
+                }
                 elem.adotado = true;
                 elem.emailDono = email;
                 elem.nomeDono = nome;
@@ -83,13 +92,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 break;
             }
         }
-
-        // 🔹 Limpar os campos após o envio bem-sucedido
-        nomeinput.value = "";
-        emailinput.value = "";
-        agenumber.value = "";
-
-
 
         localStorage.setItem('lobos', JSON.stringify(lobos));
 
