@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (elem.id === lobinhoObjeto.id) {
                 if (elem.adotado === true) {
                     alert("Este Lobinho já foi Adotado!");
-                    window.location.replace("../HomePage/home.html");
+                    window.location.replace("../ListaLobo/lista.html");
                     return;
                 }
                 elem.adotado = true;
