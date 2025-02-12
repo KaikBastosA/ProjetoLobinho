@@ -71,24 +71,30 @@ document.addEventListener("DOMContentLoaded", function () {
             alert("A idade deve estar entre 1 e 120 anos.");
             return;
         }
+        
+        const lobos = JSON.parse(localStorage.getItem('lobos'));
+
+        for(let elem of lobos) {
+            if (elem.id === lobinhoObjeto.id) {
+                elem.adotado = true;
+                elem.emailDono = email;
+                elem.nomeDono = nome;
+                elem.idadeDono = ageValue;
+                break;
+            }
+        }
 
         // 🔹 Limpar os campos após o envio bem-sucedido
         nomeinput.value = "";
         emailinput.value = "";
         agenumber.value = "";
 
-        const lobos = JSON.parse(localStorage.getItem('lobos'));
 
-        for(let elem of lobos) {
-            if (elem.id === lobinhoObjeto.id) {
-                elem.adotado = true;
-                break;
-            }
-        }
 
         localStorage.setItem('lobos', JSON.stringify(lobos));
 
         alert("Lobinho adotado com sucesso!");
+        window.location.replace("../HomePage/home.html");
     });
 });
 
