@@ -83,6 +83,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (elem.id === lobinhoObjeto.id) {
                 if (elem.adotado === true) {
                     alert("Este Lobinho já foi Adotado!");
+                    window.location.replace("../HomePage/home.html");
                     return;
                 }
                 elem.adotado = true;
@@ -96,7 +97,6 @@ document.addEventListener("DOMContentLoaded", function () {
         localStorage.setItem('lobos', JSON.stringify(lobos));
 
         alert("Lobinho adotado com sucesso!");
-        window.location.replace("../HomePage/home.html");
     });
 });
 
