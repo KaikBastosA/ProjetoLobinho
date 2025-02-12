@@ -135,6 +135,10 @@ main section div p{
 
 /* ----- ESTILIZAÇÃO DO FOOTER ----- */
 
+section {
+    margin-bottom: 30px;
+}
+
 .division-bar {
     width: 100%;
     height: 5px;
