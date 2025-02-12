@@ -509,3 +509,27 @@ document.querySelector("#wolf-search-bar").addEventListener("keydown", async (ev
 
     await loadWolfPosts();
 });
+
+document.querySelector(".wolf-search-link").addEventListener("click", async () => {
+    const searchBarValue = document.querySelector("#wolf-search-bar").value;
+
+    if (searchBarValue !== "") {
+        const currentUserSearch = JSON.parse(localStorage.getItem('currentUserSearch'));
+    
+        currentUserSearch.searchFlag = true;
+        currentUserSearch.searchContent = searchBarValue.toLowerCase();
+    
+        // Salva o Conteúdo Pesquisado:
+        localStorage.setItem('currentUserSearch', JSON.stringify(currentUserSearch));
+    } else {
+        // Barra de Busca Vazia:
+        localStorage.setItem('currentUserSearch', JSON.stringify(nullSearch));
+    }
+
+    loadWolfSearchArray();
+    
+    // Corrige o Número Atual da Página:
+    localStorage.setItem('currentUserPage', 1);
+
+    await loadWolfPosts();
+});
