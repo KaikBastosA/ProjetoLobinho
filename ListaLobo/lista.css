@@ -79,10 +79,16 @@ footer {
     align-self: stretch;
     background-color: #DEB959;
     color: #FFF;
-    border: none;
+    border: 3px solid #DEB959;
     font-size: 180%;
     font-weight: 500;
     cursor: pointer;
+    transition: 0.7s background-color cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+#add-wolf-button:hover {
+    background-color: #FFF;
+    color: #DEB959;
 }
 
 
@@ -345,14 +351,27 @@ header a:last-child:hover::after {
     font-size: 1.5rem;
     font-weight: 500;
     cursor: pointer;
+    transition: 0.7s background-color cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .adopted {
     background-color: #DEB959;
+    border: 3px solid #DEB959;
+}
+
+.adopted:hover {
+    background-color: #FFF;
+    color: #F00;
 }
 
 .adopt {
     background-color: #7AAC3A;
+    border: 3px solid #7AAC3A;
+}
+
+.adopt:hover {
+    background-color: #FFF;
+    color: #7AAC3A;
 }
 
 .wolf-info {
