@@ -211,10 +211,9 @@ header a:last-child:hover::after {
     flex-direction: column;
 }
 
-
 .gray-input-field {
     background-color: #E6E6E6;
-    padding: 0 5px;
+    padding-left: 5px;
     font-weight: 500;
 }
 
@@ -239,6 +238,10 @@ header a:last-child:hover::after {
 .box-line:first-child ~ .box-line {
     flex-direction: column;
     gap: 0;
+}
+
+#wolf-age-container {
+    max-width: 30%;
 }
 
 .first-form-line-sep:first-child {
